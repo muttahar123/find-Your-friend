@@ -2,15 +2,22 @@ import { connectDB } from "@/lib/db/connectDB";
 import { CategoryModal } from "@/lib/models/Category";
 
 export async function GET(request) {
-  await connectDB();
-  const categories = await CategoryModal.find();
-  return Response.json(
-    {
-      msg: "Categories Fetched Successfully",
-      categories,
-    },
-    { status: 200 }
-  );
+  try{
+    await connectDB();
+    const categories = await CategoryModal.find();
+    return Response.json(
+      {
+        msg: "Categories Fetched Successfully",
+        categories,
+      },
+      { status: 200 }
+    );
+  }catch(err){
+    return RESPONSE.json({
+      msg: "Error in getting categories",
+      err: err.message
+    },{status: 500})
+  }
 }
 
 export async function POST(request) {
