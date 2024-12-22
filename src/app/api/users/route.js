@@ -31,7 +31,7 @@ obj.password = hashedPassword;
 let newUser = new UserModal(obj);
 await newUser.save();
 
-var token = jwt.sign({ _id: newUser_.id , role: newUser_.role }, process.env.JWT_KEY);
+var token = jwt.sign({ _id: newUser._id , role: newUser.role }, process.env.JWT_KEY);
 
 console.log("obj==>", obj)
 
